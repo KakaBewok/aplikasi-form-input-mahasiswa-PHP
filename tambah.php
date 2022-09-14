@@ -24,7 +24,7 @@
             }
         } else {
             echo "<script>
-                    alert('Data tidak boleh kosong.');
+                    alert('Data tidak boleh kosong, silahkan isi data dengan lengkap.');
                   </script>";
         }
     }
