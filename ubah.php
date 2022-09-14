@@ -16,7 +16,6 @@
             $_POST["jurusan"] !== '' &&
             $_POST["gambar"] !== ''){
 
-
             // cek apakah data berhasil diubah atau tidak
             if(ubah($_POST) > 0){
                 echo "<script>

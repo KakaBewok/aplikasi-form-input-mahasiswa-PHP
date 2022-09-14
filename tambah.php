@@ -14,7 +14,7 @@
             // cek apakah data berhasil ditambahkan atau tidak
             if(tambah($_POST) > 0){
                 echo "<script>
-                    alert('Data anda tersimpan.');
+                    alert('Data berhasil disimpan.');
                     document.location.href = 'index.php';
                   </script>";
             } else {
