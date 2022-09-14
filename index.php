@@ -1,7 +1,13 @@
 <?php
 require 'functions.php';
 
-$mahasiswa = query("SELECT * FROM mahasiswa");
+// text query ORDER BY berguna untuk menentukan urutan menampilkan data (DESC besar ke kecil, ASC kecil ke besar kalo berdasarkan id
+$mahasiswa = query("SELECT * FROM mahasiswa ORDER BY id DESC");
+
+// percabangan ini akan menimpa/reassigment variabel $mahasiswa ketika tombol cari diklik
+if(isset($_POST["cari"])){
+    $mahasiswa = cari($_POST["keyword"]);
+}
 
 ?>
 
@@ -20,6 +26,13 @@ $mahasiswa = query("SELECT * FROM mahasiswa");
 
     <br/>
     <br/>
+
+    <form action="" method="post">
+        <!-- properti autofocus untuk otomoatis ke input search saat laman diload -->
+        <!-- properti auto complete untuk menampilkan/tidak history dari pencariannya -->
+        <input type="text" name="keyword" placeholder="Adi Permana" size="25" autofocus autocomplete="off">
+        <button type="submit" name="cari">CARI</button>
+    </form>
     
     <table border="1" cellpadding="7" cellspacing="0">
         <tr>

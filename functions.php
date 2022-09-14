@@ -32,6 +32,7 @@ function tambah($data){
     $query = "INSERT INTO mahasiswa 
     VALUES
     ('', '$nama','$nim','$email','$jurusan','$gambar')";
+    
     mysqli_query($conn_db, $query);
 
     // mengembalikan jika data berhasil masuk ke db akan menghasilkan 1, jika tidak -1
@@ -73,6 +74,18 @@ function ubah($data){
 
     // mengembalikan jika data berhasil masuk ke db akan menghasilkan 1, jika tidak -1
     return mysqli_affected_rows($conn_db);
+}
+function cari($keyword){
+    // text query = artinya sama persis, kalo LIKE dan ditambah % pada akhir dan awal keywordnya yang mirip2 yang akan ditampilkan
+    // OR artinya atau
+    $query = "SELECT * FROM mahasiswa WHERE nama LIKE '%$keyword%' OR 
+                nim LIKE '%$keyword%' OR
+                nama LIKE '%$keyword%' OR
+                jurusan LIKE '%$keyword%'
+                ";
+
+    // fungsi query diambil dari fungsi diatas yang pertama dibuat
+    return query($query);
 }
 ?>
 
