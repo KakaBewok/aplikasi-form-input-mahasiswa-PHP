@@ -8,7 +8,6 @@ $mahasiswa = query("SELECT * FROM mahasiswa ORDER BY id DESC");
 if(isset($_POST["cari"])){
     $mahasiswa = cari($_POST["keyword"]);
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -68,7 +67,7 @@ if(isset($_POST["cari"])){
             <td><?= $mhs["nim"]; ?></td>
             <td><?= $mhs["email"]; ?></td>
             <td><?= $mhs["jurusan"]; ?></td>
-            <td><img src="<?= $mhs["gambar"]; ?>" alt="Foto tidak ditemukan" width="100px"></td>
+            <td><img src="img/<?= $mhs["gambar"]; ?>" alt="Foto tidak ditemukan" width="100px"></td>
         </tr>
         <?php $i++; ?>
         <?php endforeach; ?>

@@ -26,7 +26,16 @@ function tambah($data){
     $nim = htmlSpecialChars($data["nim"]);
     $email = htmlSpecialChars($data["email"]);
     $jurusan = htmlSpecialChars($data["jurusan"]);
-    $gambar = htmlSpecialChars($data["gambar"]);
+
+    // $gambar = htmlSpecialChars($data["gambar"]);
+ 
+    // upload gambar ke direktori
+    $gambar = upload();
+    
+    // memeriksa apakah fungsi upload gagal(false), jika gagal akan stop. Jika berhasil akan menjalankan query tambah data atau nama file gambar disimpan ke db
+    if(!$gambar){
+        return false;
+    }
 
     // query insert data
     $query = "INSERT INTO mahasiswa 
@@ -37,6 +46,73 @@ function tambah($data){
 
     // mengembalikan jika data berhasil masuk ke db akan menghasilkan 1, jika tidak -1
     return mysqli_affected_rows($conn_db);
+}
+// fungsi untuk mengupload gambar fungsi ini digunakan juga pada fungsi ubah
+function upload(){
+    // mengambil data-data pada gambar yang diupload melalui $_FILES
+    // gambar.name = nama file + ekstensinya
+    $namaFile = $_FILES['gambar']['name'];
+    $ukuranFile = $_FILES['gambar']['size'];
+    $error = $_FILES['gambar']['error'];
+    $tmpName = $_FILES['gambar']['tmp_name'];
+
+    // melakukan pengecekan apakah tidak ada gambar yang diupload
+    // kalo 4 berarti tidak ada gambar yang diupload
+    if($error === 4){
+        echo "<script>
+                alert('Pilih gambar terlebih dahulu.');
+                </script>";
+    
+    // ini untuk mengembalikan false pada fungsi upload()
+    return false;
+    }
+
+    // jika ada gambar yang diupload, maka cek ekstensinya
+    // cek lagi yang diupload gambar atau bukan(cek ekstensinya)
+    $ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
+    // explode adalah fungsi untuk memecah string menjadi array, memecahnya menggunakan delimiter
+    $ekstensiGambar = explode('.', $namaFile); //string akan dipisahkan melalui titik(.) dari stringnya, kalo rizal.jpg, berarti akan jadi ['rizal', 'jpg']
+    
+    // method end berguna untuk mengambil array paling terakhir, artinya variabel dibawah akan mengambil ekstensinya saja (.jpg).
+    // method strtolower berguna untuk merubah string menjadi huruf kecil semua
+    $ekstensiGambar = strtolower(end($ekstensiGambar));
+
+    // memeriksa apakah ekstensinya sudah sesuai dengan variabel ekstensi valid
+    // method in_array akan memeriksa adakah sebuah string di dalam array(fungsi ini menghasilkan boolean)
+    if(!in_array($ekstensiGambar, $ekstensiGambarValid)){
+        echo "<script>
+                alert('Form hanya bisa menerima file gambar, silahkan upload kembali.');
+                </script>";
+    
+    //return false artinya kode dibawahnya tidak akan dibaca
+    return false;
+    }
+
+    // memeriksa apakah ukuran gambar sesuai atau terlalu besar
+    // 1000000 = 1mb
+    if($ukuranFile > 1000000){
+        echo "<script>
+                alert('Ukuran gambar anda melebihi 1MB.');
+                </script>";
+    
+    return false;
+    }
+
+    // jika lolos pengecekan 1.upload kosong 2.gambar beda ekstensi 3.ukuran terlalu besar
+    //gambar akan diupload, fungsi move_uploaded_files() berfungsi memindahkan gambar dari direktori sementara ke direktori tujuan
+
+    // untuk menghindari namafile sama, maka nama gambar baru harus digenerate agar unik
+    // method uniqid() akan menghasilkan angka random
+    $namaFileBaru = uniqid();
+    // operator .= penggunaannya mirip dengan += (untuk merangkai)
+    $namaFileBaru .= '.'; //$namaFileBaru = $namaFileBaru . '.';
+    $namaFileBaru .= $ekstensiGambar; ////$namaFileBaru = $namaFileBaru . ekstensiGambar;
+
+    move_uploaded_file($tmpName, 'img/'. $namaFileBaru);
+
+    // mengembalikan namafile, namafile akan digunakan untuk diupload ke dalam database
+    return $namaFileBaru;
+
 }
 // fungsi untuk menghapus data
 function hapus($id){
@@ -58,7 +134,15 @@ function ubah($data){
     $nim = htmlSpecialChars($data["nim"]);
     $email = htmlSpecialChars($data["email"]);
     $jurusan = htmlSpecialChars($data["jurusan"]);
-    $gambar = htmlSpecialChars($data["gambar"]);
+    // gambar lama sebelum diupdate
+    $gambarLama = htmlSpecialChars($data["gambarLama"]);
+
+    // cek apakah user pilih gambar baru atau tidak, files['gambar'] diambil dari form input ubah gambar di file ubah.php
+    if($_FILES['gambar']['error'] === 4){
+        $gambar = $gambarLama;
+    } else {
+        $gambar = upload();
+    }
 
     // query insert data
     $query = "UPDATE mahasiswa SET 
@@ -69,12 +153,14 @@ function ubah($data){
                 gambar = '$gambar'
                 WHERE id = $id
                 ";
+    //variabel $gambar didapat dari hasil fungsi upload() yang mana itu adalah nama gambar baru hasil perubahan
 
     mysqli_query($conn_db, $query);
 
     // mengembalikan jika data berhasil masuk ke db akan menghasilkan 1, jika tidak -1
     return mysqli_affected_rows($conn_db);
 }
+// fungsi untuk mencari
 function cari($keyword){
     // text query = artinya sama persis, kalo LIKE dan ditambah % pada akhir dan awal keywordnya yang mirip2 yang akan ditampilkan
     // OR artinya atau

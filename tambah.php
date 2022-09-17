@@ -7,8 +7,7 @@
         if( $_POST["nama"] !== '' &&
             $_POST["nim"] !== '' &&
             $_POST["email"] !== '' &&
-            $_POST["jurusan"] !== '' &&
-            $_POST["gambar"] !== ''){
+            $_POST["jurusan"] !== ''){
 
 
             // cek apakah data berhasil ditambahkan atau tidak
@@ -49,7 +48,7 @@
 <body>
     <div class="container">
         <h1>Tambah Data Mahasiswa</h1>
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             <ul style="list-style: none">
                 <li>
                     <label for="nama">Nama :</label>
@@ -69,7 +68,7 @@
                 </li>
                 <li>
                     <label for="gambar">Gambar  :</label>
-                    <input type="text" name="gambar" id="gambar" placeholder="andim.jpg"/>
+                    <input type="file" name="gambar" id="gambar" placeholder="andin.jpg"/>
                 </li>
                 <li>
                     <button type="submit" name="submit">TAMBAH</button>

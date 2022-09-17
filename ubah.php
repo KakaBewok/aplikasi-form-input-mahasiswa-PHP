@@ -54,9 +54,14 @@
 <body>
     <div class="container">
         <h1>Tambah Data Mahasiswa</h1>
-        <form action="" method="post">
+        <!-- tambahkan tipe encoding untuk mengelola file yang akan diupload -->
+        <form action="" method="post" enctype="multipart/form-data">
             <!-- form input bertype hidden yang berfungsi untuk menampilkan id mhs yang akan diubah dan ditangkap di fungsi ubah nanti -->
             <input type="hidden" name="id" value="<?= $mhs["id"]; ?>">
+            
+            <!-- untuk mengambil gambar lama dari database -->
+            <!-- jika gambar lama gak diupdate, maka gambar lama yang akan ditampilkan, jika tidak, maka gambar baru yang akan nampil -->
+            <input type="hidden" name="gambarLama" value="<?= $mhs["gambar"]; ?>">
 
             <ul style="list-style: none">
                 <li>
@@ -78,8 +83,10 @@
                     <input type="text" name="jurusan" id="jurusan" placeholder="Sains Komunikasi" value="<?= $mhs["jurusan"]; ?>"/>
                 </li>
                 <li>
-                    <label for="gambar">Gambar  :</label>
-                    <input type="text" name="gambar" id="gambar" placeholder="andim.jpg" value="<?= $mhs["gambar"]; ?>"/>
+                    <label for="gambar">Gambar  :</label> <br/>
+                    <!-- menampilkan gambar yang telah diupload -->
+                    <img src="img/<?= $mhs['gambar'];?>" alt="Not Found" width="85px"> <br/>
+                    <input type="file" name="gambar" id="gambar" />
                 </li>
                 <li>
                     <button type="submit" name="submit">UBAH</button>
