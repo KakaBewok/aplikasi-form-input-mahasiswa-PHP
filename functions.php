@@ -107,12 +107,11 @@ function upload(){
     // operator .= penggunaannya mirip dengan += (untuk merangkai)
     $namaFileBaru .= '.'; //$namaFileBaru = $namaFileBaru . '.';
     $namaFileBaru .= $ekstensiGambar; ////$namaFileBaru = $namaFileBaru . ekstensiGambar;
-
+    //fungsi move_uploaded_files() berfungsi memindahkan gambar dari direktori sementara ke direktori tujuan
     move_uploaded_file($tmpName, 'img/'. $namaFileBaru);
 
     // mengembalikan namafile, namafile akan digunakan untuk diupload ke dalam database
     return $namaFileBaru;
-
 }
 // fungsi untuk menghapus data
 function hapus($id){
