@@ -172,5 +172,53 @@ function cari($keyword){
     // fungsi query diambil dari fungsi diatas yang pertama dibuat
     return query($query);
 }
+// fungsi registrasi
+function registrasi($data){
+    global $conn_db;
+
+    // 1. inisialisasi data $_POST ke variabel
+
+    //stripslashes() berfungsi untuk membersihkan karakter slash
+    //strtolower() untuk membuat username berhuruf kecil semua
+    $username = strtolower(stripslashes($data['username']));
+    //mysqli_real_escape_string() berfungsi untuk memungkinkan db menyimpan kutip di password
+    $password = mysqli_real_escape_string($conn_db, $data['password']);
+    $password2 = mysqli_real_escape_string($conn_db, $data['password2']);
+
+
+    // 2. cek username sudah ada atau belum
+    //ambil data dari tabel user yang usernamenya sama dengan username yg baru diinput
+    $result = mysqli_query($conn_db, "SELECT username FROM users WHERE username = '$username'");
+    //data result dipecah dan dicek, jika ada menghasilkan true, jika salah menghasilkan false
+    if( mysqli_fetch_assoc($result)){
+        echo "<script>
+                alert('Username sudah terdaftar');
+              </script>";
+        return false;
+    }
+
+    // 3. cek konfirmasi password
+    if($password !== $password2){
+        echo "<script>
+                alert('Konfirmasi password tidak sama');
+              </script>";
+        return false;
+    } 
+
+    // 4. enkripsi password, password_hash() untuk mengacak password,
+    //parameternya password yang akan diacak dan algoritmanya
+    $password = password_hash($password, PASSWORD_DEFAULT);
+
+    // 5. masukan user baru ke db
+    mysqli_query($conn_db, "INSERT INTO users VALUES(
+        '',
+        '$username',
+        '$password'
+    )");
+
+    // 6. return efek query (berhasil = 1, gagal = 0)
+    return mysqli_affected_rows($conn_db);
+
+}
 ?>
 
