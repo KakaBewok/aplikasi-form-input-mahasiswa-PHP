@@ -9,13 +9,6 @@
 
     // cek tombol submit sudah ditekan atau belum
     if(isset($_POST["submit"])){
-        // cek apakah data yang diinput kosong atau tidak
-        if( $_POST["nama"] !== '' &&
-            $_POST["nim"] !== '' &&
-            $_POST["email"] !== '' &&
-            $_POST["jurusan"] !== '' &&
-            $_POST["gambar"] !== ''){
-
             // cek apakah data berhasil diubah atau tidak
             if(ubah($_POST) > 0){
                 echo "<script>
@@ -27,11 +20,6 @@
                     alert('Data GAGAL diubah.');
                   </script>";
             }
-        } else {
-            echo "<script>
-                    alert('Data tidak boleh kosong.');
-                  </script>";
-        }
     }
 ?>
 
@@ -53,7 +41,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Tambah Data Mahasiswa</h1>
+        <h1>Ubah Data Mahasiswa</h1>
         <!-- tambahkan tipe encoding untuk mengelola file yang akan diupload -->
         <form action="" method="post" enctype="multipart/form-data">
             <!-- form input bertype hidden yang berfungsi untuk menampilkan id mhs yang akan diubah dan ditangkap di fungsi ubah nanti -->

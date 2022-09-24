@@ -35,8 +35,6 @@ if(isset($_POST["cari"])){
             </div>
         </form>
 
-        <!-- <br/> -->
-        
         <a class="btn btn-primary" href="tambah.php" role="button">Tambah</a>
 
         <br/>
@@ -51,6 +49,8 @@ if(isset($_POST["cari"])){
                 <th>Jurusan</th>
                 <th>Gambar</th>
             </tr>
+
+            <br>
 
             <?php if(count($mahasiswa) === 0){
                 $dataKosong = "Tidak ada data apapun.";
@@ -67,9 +67,9 @@ if(isset($_POST["cari"])){
             <tr>
                 <td><?= $i;?></td>
                 <td>
-                    <a href="ubah.php?id=<?= $mhs["id"]; ?>">Ubah</a> |
+                    <a class="btn btn-warning" href="ubah.php?id=<?= $mhs["id"]; ?>" role="button">Edit</a>
                     <!-- fungsi onclick(js) berfungsi untuk mengkonfirmasi dalam mengahapus data-->
-                    <a href="hapus.php?id=<?= $mhs["id"]; ?>" onclick=" return confirm('Apakah anda yakin menghapus data ini?');">Hapus</a>
+                    <a class="btn btn-danger ms-2" href="hapus.php?id=<?= $mhs["id"]; ?>" role="button" onclick=" return confirm('Apakah anda yakin menghapus data ini?');">Hapus</a>
                 </td>
                 <td><?= $mhs["nama"]; ?></td>
                 <td><?= $mhs["nim"]; ?></td>
