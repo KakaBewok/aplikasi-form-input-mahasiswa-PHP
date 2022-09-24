@@ -16,62 +16,72 @@ if(isset($_POST["cari"])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./bootstrap/css/bootstrap.css" />
     <title>DAFTAR MAHASISWA</title>
 </head>
 <body>
-    <h1>DAFTAR MAHASISWA</h1>
+    <div class="container mt-5 mb-5">
+        <h1>DAFTAR MAHASISWA</h1>
 
-    <a href="tambah.php">Tambah Data</a>
+        <br/>
+        <br/>
 
-    <br/>
-    <br/>
+        <form action="" method="post">
+            <!-- properti autofocus untuk otomoatis ke input search saat laman diload -->
+            <!-- properti auto complete untuk menampilkan/tidak history dari pencariannya -->
+            <div class="input-group mb-3" style="width: 35%">
+                <input type="text" name="keyword" placeholder="Ketikan keyword pencarian" size="25" autofocus autocomplete="off" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <button class="btn btn-primary" name="cari" type="submit" id="button-addon2">Cari</button>
+            </div>
+        </form>
 
-    <form action="" method="post">
-        <!-- properti autofocus untuk otomoatis ke input search saat laman diload -->
-        <!-- properti auto complete untuk menampilkan/tidak history dari pencariannya -->
-        <input type="text" name="keyword" placeholder="Adi Permana" size="25" autofocus autocomplete="off">
-        <button type="submit" name="cari">CARI</button>
-    </form>
-    
-    <table border="1" cellpadding="7" cellspacing="0">
-        <tr>
-            <th>No.</th>
-            <th>Aksi</th>
-            <th>Nama</th>
-            <th>Nim</th>
-            <th>Email</th>
-            <th>Jurusan</th>
-            <th>Gambar</th>
-        </tr>
-
-        <?php if(count($mahasiswa) === 0){
-            $dataKosong = "Tidak ada data apapun.";
-            echo "<h3>{$dataKosong}</h3>";
-            } else {
-            $mahasiswa;
-            }
-        ?>
+        <!-- <br/> -->
+        
+        <a class="btn btn-primary" href="tambah.php" role="button">Tambah</a>
 
         <br/>
 
-        <?php $i = 1; ?>
-        <?php foreach($mahasiswa as $mhs) : ?>
-        <tr>
-            <td><?= $i;?></td>
-            <td>
-                <a href="ubah.php?id=<?= $mhs["id"]; ?>">Ubah</a> |
-                <!-- fungsi onclick(js) berfungsi untuk mengkonfirmasi dalam mengahapus data-->
-                <a href="hapus.php?id=<?= $mhs["id"]; ?>" onclick=" return confirm('Apakah anda yakin menghapus data ini?');">Hapus</a>
-            </td>
-            <td><?= $mhs["nama"]; ?></td>
-            <td><?= $mhs["nim"]; ?></td>
-            <td><?= $mhs["email"]; ?></td>
-            <td><?= $mhs["jurusan"]; ?></td>
-            <td><img src="img/<?= $mhs["gambar"]; ?>" alt="Foto tidak ditemukan" width="100px"></td>
-        </tr>
-        <?php $i++; ?>
-        <?php endforeach; ?>
-        
-    </table>
+        <table class="table table-striped border rounded shadow-lg">
+            <tr>
+                <th>No.</th>
+                <th>Aksi</th>
+                <th>Nama</th>
+                <th>Nim</th>
+                <th>Email</th>
+                <th>Jurusan</th>
+                <th>Gambar</th>
+            </tr>
+
+            <?php if(count($mahasiswa) === 0){
+                $dataKosong = "Tidak ada data apapun.";
+                echo "<h3>{$dataKosong}</h3>";
+                } else {
+                $mahasiswa;
+                }
+            ?>
+
+            <br/>
+
+            <?php $i = 1; ?>
+            <?php foreach($mahasiswa as $mhs) : ?>
+            <tr>
+                <td><?= $i;?></td>
+                <td>
+                    <a href="ubah.php?id=<?= $mhs["id"]; ?>">Ubah</a> |
+                    <!-- fungsi onclick(js) berfungsi untuk mengkonfirmasi dalam mengahapus data-->
+                    <a href="hapus.php?id=<?= $mhs["id"]; ?>" onclick=" return confirm('Apakah anda yakin menghapus data ini?');">Hapus</a>
+                </td>
+                <td><?= $mhs["nama"]; ?></td>
+                <td><?= $mhs["nim"]; ?></td>
+                <td><?= $mhs["email"]; ?></td>
+                <td><?= $mhs["jurusan"]; ?></td>
+                <td><img src="img/<?= $mhs["gambar"]; ?>" alt="Foto tidak ditemukan" width="120px"></td>
+            </tr>
+            <?php $i++; ?>
+            <?php endforeach; ?>
+            
+        </table>
+    </div>
+    <script src="./bootstrap/js/bootstrap.js"></script>
 </body>
 </html>
