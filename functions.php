@@ -218,7 +218,8 @@ function registrasi($data){
 
     // 6. return efek query (berhasil = 1, gagal = 0)
     return mysqli_affected_rows($conn_db);
-
 }
+
+
 ?>
 
