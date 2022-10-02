@@ -1,4 +1,13 @@
 <?php
+session_start();
+
+//memeriksa apakah $_SESSION['login'] sudah ada/true
+if(!isset($_SESSION['login'])){
+    header("Location: login.php");
+    //untuk menghentikan eksekusi kode dibawahnya
+    exit;
+}
+
 require 'functions.php';
 
 // text query ORDER BY berguna untuk menentukan urutan menampilkan data (DESC besar ke kecil, ASC kecil ke besar kalo berdasarkan id
@@ -21,6 +30,10 @@ if(isset($_POST["cari"])){
 </head>
 <body>
     <div class="container mt-5 mb-5">
+        <a class="btn btn-danger" href="logout.php" role="button">Log out</a>
+
+        <br>
+
         <h1>DAFTAR MAHASISWA</h1>
 
         <br/>

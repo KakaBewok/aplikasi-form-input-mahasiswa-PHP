@@ -1,4 +1,15 @@
 <?php
+    //setiap menggunakan session, pastikan selalu menggunakan method ini di paling atas program
+    session_start();
+
+    //untuk memeriksa, kalo sudah login tidak bisa lagi masuk ke laman login
+    //memeriksa apakah $_SESSION['login'] sudah ada/true
+    if(isset($_SESSION['login'])){
+        header("Location: index.php");
+        //untuk menghentikan eksekusi kode dibawahnya
+        exit;
+    }
+
     require('./functions.php');
     
     if(isset($_POST['masuk'])){
@@ -16,6 +27,11 @@
 
             //4. jika password sama, arahkan ke index.php
             if(password_verify($password, $row['password'])){
+                //set session
+                //session akan tersimpan ke variabel super global session di dalam server
+                //dan setiap pindah halaman, variabel session ini akan dicek dulu sebelum masuk
+                $_SESSION['login'] = true;
+
                 header("Location: index.php");
                 exit;
             }

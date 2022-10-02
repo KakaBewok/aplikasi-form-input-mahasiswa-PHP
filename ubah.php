@@ -1,4 +1,13 @@
 <?php
+    session_start();
+
+    //memeriksa apakah $_SESSION['login'] sudah ada/true
+    if(!isset($_SESSION['login'])){
+        header("Location: login.php");
+        //untuk menghentikan eksekusi kode dibawahnya
+        exit;
+    }
+
     require 'functions.php';
 
     // ambil data id dari url file index
