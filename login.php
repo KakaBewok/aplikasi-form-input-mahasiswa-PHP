@@ -2,6 +2,23 @@
     //setiap menggunakan session, pastikan selalu menggunakan method ini di paling atas program
     session_start();
 
+    require('functions.php');
+
+    // 7. cek cookie ketika kembali ke laman login, kalo ada dia masih login
+    if(isset($_COOKIE['id']) && isset($_COOKIE['key'])){
+        //8. masukin ke variabel si cookienya
+        $id = $_COOKIE['id'];
+        $key = $_COOKIE['key'];
+
+        //9. ambil username berdasarkan nilai id dr cookie dan bandingkan dengan nilai dari properti 'key' (username)
+        $result = mysqli_query($conn_db, "SELECT username FROM users WHERE id = $id");
+        $row = mysqli_fetch_assoc($result);
+
+        //10. cek cookie dengan username ('key')
+        if($key === hash('sha256', $row['username'])){
+            $_SESSION['login'] = true;
+        }
+    }
     //untuk memeriksa, kalo sudah login tidak bisa lagi masuk ke laman login
     //memeriksa apakah $_SESSION['login'] sudah ada/true
     if(isset($_SESSION['login'])){
@@ -9,8 +26,6 @@
         //untuk menghentikan eksekusi kode dibawahnya
         exit;
     }
-
-    require('./functions.php');
     
     if(isset($_POST['masuk'])){
         // 1. ambil nilai kredensial
@@ -31,6 +46,17 @@
                 //session akan tersimpan ke variabel super global session di dalam server
                 //dan setiap pindah halaman, variabel session ini akan dicek dulu sebelum masuk
                 $_SESSION['login'] = true;
+
+                //5. cek remember me, kalo diceklis pakenya cookie bukan session
+                if(isset($_POST['remember'])){
+
+                    //6. buat 2 cookie (untuk menambah keamanan login)
+                    setcookie('id', $row['id'], time()+60);
+                    //samarkan username dengan properti 'key' agar tidak mudah ketauan 
+                    //dan usernamenya akan dihash supaya sulit didetect
+                    //hash fungsinya = password_hash(), 'sha256' merupakan algoritmanya
+                    setcookie('key', hash('sha256', $row['username']), time()+60);
+                }
 
                 header("Location: index.php");
                 exit;
@@ -59,6 +85,7 @@
         <?php if(isset($error)) :?>
             <br>
             <p class="badge bg-danger text-wrap text-uppercase fs-6">Username/password salah!</p>
+            <br>
         <?php endif; ?>
 
         <form action="" method="post" class="mt-3">
@@ -71,8 +98,8 @@
                 <input type="password" class="form-control" id="password" name="password">
             </div>
             <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="cek">
-                <label class="form-check-label" for="cek">Check me out</label>
+                <input type="checkbox" class="form-check-input" name="remember" id="remember">
+                <label class="form-check-label" for="remember">Remember me</label>
             </div>
             <button type="submit" class="btn btn-success" name="masuk">Masuk</button>
         </form>
