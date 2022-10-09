@@ -1,7 +1,6 @@
 <?php
 // variabel koneksi database
 $conn_db = mysqli_connect("localhost", "root", "", "db_mhs"); //menghubungkan localhost dengan mysql
-
 // fungsi untuk melakukan query menampilkan seluruh data mahasiswa
 function query($query){
 
@@ -219,6 +218,5 @@ function registrasi($data){
     // 6. return efek query (berhasil = 1, gagal = 0)
     return mysqli_affected_rows($conn_db);
 }
-
 ?>
 
