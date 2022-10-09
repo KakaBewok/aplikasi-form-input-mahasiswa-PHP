@@ -42,16 +42,16 @@ if(isset($_POST["cari"])){
             <!-- properti autofocus untuk otomoatis ke input search saat laman diload -->
             <!-- properti auto complete untuk menampilkan/tidak history dari pencariannya -->
             <div class="input-group mb-3" style="width: 35%">
-                <input type="text" name="keyword" placeholder="Ketikan keyword pencarian" size="25" autofocus autocomplete="off" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
-                <button class="btn btn-primary" name="cari" type="submit" id="button-addon2">Cari</button>
+                <input type="text" name="keyword" placeholder="Ketikan keyword pencarian" size="25" autofocus autocomplete="off" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" id="keyword">
+                <button class="btn btn-primary" name="cari" type="submit" id="tombol-cari">Cari</button>
             </div>
         </form>
 
         <a class="btn btn-primary" href="tambah.php" role="button">Tambah</a>
 
         <br/>
-        <br/>
 
+        <div id="container">
         <table class="table table-striped border rounded shadow-lg">
             <tr>
                 <th>No.</th>
@@ -94,8 +94,9 @@ if(isset($_POST["cari"])){
             <?php endforeach; ?>
             
         </table>
+        </div>
     </div>
-    <script src="./bootstrap/js/bootstrap.js"></script>
     <script src="./js/script.js"></script>
+    <script src="./bootstrap/js/bootstrap.js"></script>
 </body>
 </html>

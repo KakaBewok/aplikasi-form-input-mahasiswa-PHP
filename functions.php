@@ -162,9 +162,10 @@ function ubah($data){
 function cari($keyword){
     // text query = artinya sama persis, kalo LIKE dan ditambah % pada akhir dan awal keywordnya yang mirip2 yang akan ditampilkan
     // OR artinya atau
-    $query = "SELECT * FROM mahasiswa WHERE nama LIKE '%$keyword%' OR 
+    $query = "SELECT * FROM mahasiswa WHERE 
+                nama LIKE '%$keyword%' OR 
                 nim LIKE '%$keyword%' OR
-                nama LIKE '%$keyword%' OR
+                email LIKE '%$keyword%' OR
                 jurusan LIKE '%$keyword%'
                 ";
 
