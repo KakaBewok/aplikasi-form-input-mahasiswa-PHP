@@ -96,5 +96,6 @@ if(isset($_POST["cari"])){
         </table>
     </div>
     <script src="./bootstrap/js/bootstrap.js"></script>
+    <script src="./js/script.js"></script>
 </body>
 </html>
