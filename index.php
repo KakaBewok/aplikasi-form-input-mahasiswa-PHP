@@ -10,25 +10,7 @@ if(!isset($_SESSION['login'])){
 
 require 'functions.php';
 
-//pagination (config)
-//1 data yang akan ditampilkan
-$dataPerHalaman = 3;
-//2 jumlahHalaman = total data/data perhalaman
-$totalData = count(query("SELECT * FROM mahasiswa"));
-//3 fungsi ceil() berguna untuk pembulatan SELALU ke atas
-$jumlahHalaman = ceil($totalData / $dataPerHalaman);
-//4 halaman aktif diambil darai URL
-$halamanAktif = (isset($_GET['halaman'])) ? $_GET['halaman'] : 1;
-//5 menentukan data awal(index awal) di halaman
-//misal, halaman = 2, awalData = 3
-$awalData = ($dataPerHalaman * $halamanAktif) - $dataPerHalaman;
-
-// var_dump($jumlahHalaman);
-
-// text query ORDER BY berguna untuk menentukan urutan menampilkan data (DESC besar ke kecil, ASC kecil ke besar kalo berdasarkan id
-//limit untuk membatasi data yang ditampilkan
-$mahasiswa = query("SELECT * FROM mahasiswa LIMIT $awalData, $dataPerHalaman");
-// $mahasiswa = query("SELECT * FROM mahasiswa ORDER BY id DESC LIMIT 0, 2");
+$mahasiswa = query("SELECT * FROM mahasiswa ORDER BY id DESC");
 
 // percabangan ini akan menimpa/reassigment variabel $mahasiswa ketika tombol cari diklik
 if(isset($_POST["cari"])){
@@ -68,27 +50,6 @@ if(isset($_POST["cari"])){
         <a class="btn btn-primary" href="tambah.php" role="button">Tambah</a>
 
         <br/>
-        <br/>
-
-        <!-- 6 navigasi -->
-        <!-- 8 menampilkan arrow jika halaman aktif lebih dari 1, kalo 1 or < 1 berarti tidak akan muncul arrownya -->
-        <?php if($halamanAktif > 1) : ?>
-            <a href="?halaman=<?= $halamanAktif - 1; ?>">&laquo;</a>
-        <?php endif; ?>
-
-        <!-- 7 pengulangan untuk membuat link pagination (halaman) -->
-        <?php for($i = 1; $i <= $jumlahHalaman; $i++) :?>
-            <?php if($i == $halamanAktif) : ?>
-                <a href="?halaman=<?= $i; ?>" style="text-decoration: none; font-weight: bold; color: black"><?= $i ?></a>
-            <?php else : ?>
-                <a href="?halaman=<?= $i; ?>"><?= $i ?></a>
-            <?php endif; ?>
-        <?php endfor; ?>
-        <!-- 9 arrow next page -->
-        <?php if($halamanAktif < $jumlahHalaman) : ?>
-            <a href="?halaman=<?= $halamanAktif + 1; ?>">&raquo;</a>
-        <?php endif; ?>
-
         <br/>
 
         <table class="table table-striped border rounded shadow-lg">
