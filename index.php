@@ -25,6 +25,16 @@ if(isset($_POST["cari"])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./bootstrap/css/bootstrap.css" />
+    <style>
+        .loader {
+            width: 170px;
+            position: absolute;
+            top: 145px;
+            left: 850px;
+            z-index: -1;
+            display: none;
+        }
+    </style>
     <title>DAFTAR MAHASISWA</title>
 </head>
 <body>
@@ -46,6 +56,8 @@ if(isset($_POST["cari"])){
                 <button class="btn btn-primary" name="cari" type="submit" id="tombol-cari">Cari</button>
             </div>
         </form>
+        <!-- 3. tambahkan gambar loading -->
+        <img src="./img/load.gif" alt="loading" class="loader">
 
         <a class="btn btn-primary" href="tambah.php" role="button">Tambah</a>
 
@@ -96,6 +108,7 @@ if(isset($_POST["cari"])){
         </table>
         </div>
     </div>
+    <script src="./js/jquery.min.js"></script>
     <script src="./js/script.js"></script>
     <script src="./bootstrap/js/bootstrap.js"></script>
 </body>

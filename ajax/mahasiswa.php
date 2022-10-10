@@ -1,4 +1,7 @@
 <?php
+    //mencoba mendelay halaman ini selama 1 detik agar terjadi loading
+    usleep(500000);
+
     require '../functions.php';
 
     //menangkap keyword dari AJAX, dari file script.js di xhr.open('get', ...)
