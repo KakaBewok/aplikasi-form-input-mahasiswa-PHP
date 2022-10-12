@@ -1,6 +1,6 @@
 <?php
     //mencoba mendelay halaman ini selama 1 detik agar terjadi loading
-    usleep(500000);
+    usleep(100000);
 
     require '../functions.php';
 

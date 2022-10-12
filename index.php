@@ -34,16 +34,23 @@ if(isset($_POST["cari"])){
             z-index: -1;
             display: none;
         }
+        /* setting css ketika tampilan laman akan diprint */
+        @media print{
+            /* .log-out, .form-search, .tambah {
+                display: none;
+            } */
+            
+        }
     </style>
     <title>DAFTAR MAHASISWA</title>
 </head>
 <body>
     <div class="container mt-5 mb-5">
-        <a class="btn btn-danger" href="logout.php" role="button">Log out</a>
+        <a class="btn btn-danger log-out" href="logout.php" role="button">Log out</a>
 
         <br>
 
-        <h1>DAFTAR MAHASISWA</h1>
+        <h1 class="title">DAFTAR MAHASISWA</h1>
 
         <br/>
         <br/>
@@ -51,7 +58,7 @@ if(isset($_POST["cari"])){
         <form action="" method="post">
             <!-- properti autofocus untuk otomoatis ke input search saat laman diload -->
             <!-- properti auto complete untuk menampilkan/tidak history dari pencariannya -->
-            <div class="input-group mb-3" style="width: 35%">
+            <div class="input-group mb-3 form-search" style="width: 35%">
                 <input type="text" name="keyword" placeholder="Ketikan keyword pencarian" size="25" autofocus autocomplete="off" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" id="keyword">
                 <button class="btn btn-primary" name="cari" type="submit" id="tombol-cari">Cari</button>
             </div>
@@ -59,7 +66,7 @@ if(isset($_POST["cari"])){
         <!-- 3. tambahkan gambar loading -->
         <img src="./img/load.gif" alt="loading" class="loader">
 
-        <a class="btn btn-primary" href="tambah.php" role="button">Tambah</a>
+        <a class="btn btn-primary tambah" href="tambah.php" role="button">Tambah</a>
 
         <br/>
 
