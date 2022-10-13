@@ -47,6 +47,9 @@ if(isset($_POST["cari"])){
 <body>
     <div class="container mt-5 mb-5">
         <a class="btn btn-danger log-out" href="logout.php" role="button">Log out</a>
+        <br>
+        <br>
+        <a class="btn btn-danger log-out" href="print.php" role="button" target="_blank">Print</a>
 
         <br>
 
