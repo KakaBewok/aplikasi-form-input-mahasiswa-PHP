@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 02, 2022 at 05:46 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Oct 15, 2022 at 06:25 PM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,12 +28,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `mahasiswa` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(100) NOT NULL,
+  `id` int(255) NOT NULL,
+  `nama` varchar(255) NOT NULL,
   `nim` char(8) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `jurusan` varchar(100) NOT NULL,
-  `gambar` varchar(50) NOT NULL
+  `email` varchar(255) NOT NULL,
+  `jurusan` varchar(255) NOT NULL,
+  `gambar` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -41,9 +41,10 @@ CREATE TABLE `mahasiswa` (
 --
 
 INSERT INTO `mahasiswa` (`id`, `nama`, `nim`, `email`, `jurusan`, `gambar`) VALUES
-(39, 'Noprizal', 'F1811002', 'noprizal@unida.ac.id', 'Ekonomi Syariah', '632ead4fd7e4a.jpg'),
-(41, 'Fitriyani Syolehat Rahmah', 'F1811696', 'fitris@unida.ac.id', 'Perbankan Syariah', '63331acdcb0d5.jpg'),
-(42, 'Niki Permana Sayuti', 'F1810982', 'niki@unida.ac.id', 'Ekonomi Syariah', '63331a72ce015.jpg');
+(1, 'Noprizal', 'F1811002', 'noprizal@unida.ac.id', 'Ekonomi Syariah', '634635f9eda1d.jpeg'),
+(2, 'Niki Permana', 'F1811999', 'permana.niki@unida.ac.id', 'Ekonomi Syariah', '634635e2d47d2.jpg'),
+(3, 'Fitriyani Syolehat', 'F1811888', 'fitriyani@unida.ac.id', 'Ekonomi Syariah', '634635e9cd170.jpg'),
+(4, 'Fajar Pratama', 'T1920111', 'pratama.fajar@unida.ac.id', 'Teknik Informatika', '634635f0dac22.jpg');
 
 -- --------------------------------------------------------
 
@@ -52,8 +53,8 @@ INSERT INTO `mahasiswa` (`id`, `nama`, `nim`, `email`, `jurusan`, `gambar`) VALU
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `username` varchar(20) NOT NULL,
+  `id` int(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -62,8 +63,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`) VALUES
-(5, 'admin', '$2y$10$mnCx0Et4dtSh704yvCFCQu6x2cNM04s/Y5s4KOI0yJ5nqRTYDrqWK'),
-(6, 'rizal', '$2y$10$vCQiMmxHJJ5nsT18cKutLu5c3TC6af5.weL57F0BkTY0fMxR9hsKK');
+(1, 'rizal', '$2y$10$kmpVj4hu0GBLsRQm6WGR7uI7xOf8FthdvXw3hU/f24mtbexxlZ9q.'),
+(2, 'admin', '$2y$10$.OvkPf6ZP.f/RJx2Laq7s.yJ0jwVX0sEDCV1Jbz8LOCvEWjslBtG2');
 
 --
 -- Indexes for dumped tables
@@ -89,13 +90,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
